@@ -32,7 +32,6 @@ const DATA = {
     user: [{
         '2': {
             wallet: [{ id: 6, currency: 'EUR', balance: 0, }, { id: 5, currency: 'USD', balance: 100, }],
-            // card: [{ id: 53, balance: 0, status: 'ACTIVE' }]
             card: []
         }
     }],

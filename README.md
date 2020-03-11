@@ -93,7 +93,7 @@ card_id: string
 curl -X POST -H "UserId: 2" -H "Content-Type: application/json" -H "CompanyId: 123" http://localhost:1337/card/status --data '{"status":"BLOCK", "card_id":"47d2b941-a7ea-40ad-89ad-ee409fd42545"}'
 ```
 
-#### fund card:
+#### retrieve all cards:
 ```
 PATH: GET /card
 ```
