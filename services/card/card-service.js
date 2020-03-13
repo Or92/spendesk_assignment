@@ -15,98 +15,37 @@ class CardService {
     }
 
     getCardStatus(card_id, user_id) {
-        try {
-            const DATA = require('../../index');
-            user_id_arr = DATA.user.map(user => Object.keys(user)[0]);
-            const ind = user_id_arr.indexOf(user_id);
-            let card_index = -1;
-            DATA.user[ind][user_id].card.forEach((card, ind) => card.card_id === card_id ? card_index = ind : null);
-            if (card_index > -1) {
-                return DATA.user[ind][user_id].card[card_index].status;
-            }
-            else {
-                throw ERRORS.GENERAL_ERROR;
-            }
-        }
-        catch (e) {
-            throw e;
-        }
+        return this._helperFunc(card_id, user_id).status;
     }
 
     setCardStatus(card_id, user_id, status) {
-        try {
-            const DATA = require('../../index');
-            user_id_arr = DATA.user.map(user => Object.keys(user)[0]);
-            const ind = user_id_arr.indexOf(user_id);
-            let card_index = -1;
-            DATA.user[ind][user_id].card.forEach((card, ind) => card.card_id === card_id ? card_index = ind : null);
-            if (card_index > -1) {
-                DATA.user[ind][user_id].card[card_index].status = status;
-            }
-            else {
-                throw ERRORS.GENERAL_ERROR;
-            }
+        return this._helperFunc(card_id, user_id).status = status;
+    }
+
+    _helperFunc(card_id, user_id) {
+        const DATA = require('../../index');
+        user_id_arr = DATA.user.map(user => Object.keys(user)[0]);
+        const ind = user_id_arr.indexOf(user_id);
+        let card_index = -1;
+        DATA.user[ind][user_id].card.forEach((card, ind) => card.card_id === card_id ? card_index = ind : null);
+        if (card_index > -1) {
+            return DATA.user[ind][user_id].card[card_index];
         }
-        catch (e) {
-            throw e;
+        else {
+            throw ERRORS.GENERAL_ERROR;
         }
     }
 
     addFunds(card_id, user_id, amount) {
-        try {
-            const DATA = require('../../index');
-            user_id_arr = DATA.user.map(user => Object.keys(user)[0]);
-            const ind = user_id_arr.indexOf(user_id);
-            let card_index = -1;
-            DATA.user[ind][user_id].card.forEach((card, ind) => card.card_id === card_id ? card_index = ind : null);
-            if (card_index > -1) {
-                DATA.user[ind][user_id].card[card_index].balance += amount;
-            }
-            else {
-                throw ERRORS.GENERAL_ERROR;
-            }
-        }
-        catch (e) {
-            throw e;
-        }
+        this._helperFunc(card_id, user_id).balance += amount;
     }
 
     getBelongingWalletIdFromCardId(card_id, user_id) {
-        try {
-            const DATA = require('../../index');
-            user_id_arr = DATA.user.map(user => Object.keys(user)[0]);
-            const ind = user_id_arr.indexOf(user_id);
-            let card_index = -1;
-            DATA.user[ind][user_id].card.forEach((card, ind) => card.card_id === card_id ? card_index = ind : null);
-            if (card_index > -1) {
-                return DATA.user[ind][user_id].card[card_index].wallet_id;
-            }
-            else {
-                throw ERRORS.GENERAL_ERROR;
-            }
-        }
-        catch (e) {
-            throw e;
-        }
+        return this._helperFunc(card_id, user_id).wallet_id;
     }
 
     getFunds(card_id, user_id) {
-        try {
-            const DATA = require('../../index');
-            user_id_arr = DATA.user.map(user => Object.keys(user)[0]);
-            const ind = user_id_arr.indexOf(user_id);
-            let card_index = -1;
-            DATA.user[ind][user_id].card.forEach((card, ind) => card.card_id === card_id ? card_index = ind : null);
-            if (card_index > -1) {
-                return DATA.user[ind][user_id].card[card_index].balance;
-            }
-            else {
-                throw ERRORS.GENERAL_ERROR;
-            }
-        }
-        catch (e) {
-            throw e;
-        }
+        return this._helperFunc(card_id, user_id).balance;
     }
 
     getCards(user_id) {
@@ -122,22 +61,7 @@ class CardService {
     }
 
     removeFunds(card_id, user_id, amount) {
-        try {
-            const DATA = require('../../index');
-            user_id_arr = DATA.user.map(user => Object.keys(user)[0]);
-            const ind = user_id_arr.indexOf(user_id);
-            let card_index = -1;
-            DATA.user[ind][user_id].card.forEach((card, ind) => card.card_id === card_id ? card_index = ind : null);
-            if (card_index > -1) {
-                DATA.user[ind][user_id].card[card_index].balance -= amount;
-            }
-            else {
-                throw ERRORS.GENERAL_ERROR;
-            }
-        }
-        catch (e) {
-            throw e;
-        }
+        return this._helperFunc(card_id, user_id).balance -= amount;
     }
 
 }
