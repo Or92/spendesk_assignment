@@ -15,14 +15,19 @@ const bodyParser = require('body-parser')
 const auth_middleware = require('./middlewares/auth/auth');
 const wallet_routes = require('./routes/wallet/index');
 const card_routes = require('./routes/card/index');
+const ERRORS = require('./errors/errors');
 const app = express();
 app.use(bodyParser.json());
 
 app.use('/card', auth_middleware, card_routes);
 app.use('/wallet', auth_middleware, wallet_routes);
 
+app.use((err, req, res, next) => {
+    return res.json(err || ERRORS.GENERAL_ERROR);
+});
+
 const port = process.env.PORT || 1337;
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`app listening on port ${port}!`));
 
 //NOTE: instead of using db (demonstration purposes)
 const DATA = {
